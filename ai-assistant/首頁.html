@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>打造你的 AI 學習助手｜Bryan 的 AI 工作流</title>
+<style>
+:root{
+  --bg:#f7f2e9; --card:#fffdf8; --ink:#2b2420; --sub:#6b5f55; --line:#e6dccb;
+  --gold:#b8863b; --gold-soft:#f3e6cc; --red:#b3261e; --red-soft:#fbe9e7;
+  --yellow:#a86b00; --yellow-soft:#fdf1d6; --gray-soft:#efebe5; --blue:#2f5f8a; --blue-soft:#e6eef6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1d1916; --card:#27221e; --ink:#f2ebe1; --sub:#b8ab9c; --line:#3d352e;
+    --gold:#d9aa5f; --gold-soft:#3a2f20; --red:#ff8a80; --red-soft:#3b2220;
+    --yellow:#f0c060; --yellow-soft:#3a3020; --gray-soft:#302a25; --blue:#9cc3e8; --blue-soft:#1f2b36;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.7;font-size:17px}
+.wrap{max-width:880px;margin:0 auto;padding:32px 16px 64px}
+header{text-align:center;padding:16px 0 8px}
+.tag{display:inline-block;font-size:13px;color:var(--gold);border:1px solid var(--gold);border-radius:99px;padding:2px 12px;letter-spacing:.1em}
+h1{font-size:34px;margin:12px 0 4px;letter-spacing:.04em}
+.lead{color:var(--sub);margin:0}
+h2{font-size:22px;margin:40px 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.notice{background:var(--blue-soft);border:1px solid var(--blue);border-radius:14px;padding:14px 20px;font-size:15px}
+.notice b{color:var(--blue)}
+.say{display:inline-block;background:var(--gold-soft);border-radius:10px;padding:6px 14px;font-weight:700;margin:4px 0}
+ol.how{padding-left:22px;margin:0}
+ol.how li{margin:8px 0}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+th{background:var(--gray-soft);font-size:14px;color:var(--sub);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.page{white-space:nowrap;font-weight:700}
+td.page a{color:var(--ink);text-decoration:none}
+.lv{display:inline-block;border-radius:6px;padding:1px 8px;font-size:13px;white-space:nowrap;font-weight:700}
+.lv.r{background:var(--red-soft);color:var(--red)}
+.lv.y{background:var(--yellow-soft);color:var(--yellow)}
+.lv.g{background:var(--gray-soft);color:var(--sub)}
+.star{background:var(--gold-soft)}
+.credit{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
+@media (max-width:640px){
+  h1{font-size:27px}
+  table.pages,table.pages tbody,table.pages tr,table.pages td{display:block;width:100%}
+  table.pages tr:first-child{display:none}
+  table.pages tr{border-bottom:1px solid var(--line);padding:12px 14px}
+  table.pages tr:last-child{border-bottom:0}
+  table.pages td{border:0;padding:2px 0}
+  table.pages td.page{font-size:17px}
+  table.pages td.t{display:inline-block;width:auto;margin-right:10px;color:var(--sub);font-size:14px}
+  table.pages td.l{display:inline-block;width:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="tag">免費入門包</span>
+  <h1>打造你的 AI 學習助手</h1>
+  <p class="lead">滑到好內容就丟給它：它讀完、拆好、挑出適合你的，記成你自己的規則。</p>
+</header>
+
+<h2>用之前先知道</h2>
+<div class="notice"><b>要用「能操作電腦的 AI」</b>：Claude 桌面版的 Code 分頁，或 Claude Code（要 Pro 以上方案）。網頁版和手機 App 只能聊天，沒辦法照這包做事。<br>
+<b>每頁要 AI 做的事都寫在頁面上</b>，沒有藏起來的指令，你可以先讀過再交給它。AI 安裝東西、花錢、刪檔前都會先問你；帳號密碼和金鑰一律你自己填，不要貼進對話。</div>
+
+<h2>怎麼開始</h2>
+<div class="card">
+<ol class="how">
+  <li>照第 01 頁裝好 Claude 桌面版，建一個資料夾當 AI 的辦公桌，把整個「懶人包」資料夾放進去。</li>
+  <li>在 Claude 的 Code 分頁選這個資料夾，打：<br><span class="say">開工：懶人包/02開機設定.html</span></li>
+  <li>之後要它照哪一頁做，就說「開工：懶人包/頁名.html」。</li>
+</ol>
+</div>
+
+<h2>八頁內容</h2>
+<table class="pages">
+  <tr><th>頁</th><th>做完你會有什麼</th><th>時間</th><th>重要程度</th></tr>
+  <tr><td class="page"><a href="01安裝.html">01 安裝</a></td><td>一位只在你指定資料夾裡做事的 AI 員工</td><td class="t">15 分鐘</td><td class="l"><span class="lv y">照做就好</span></td></tr>
+  <tr><td class="page"><a href="02開機設定.html">02 開機設定</a></td><td>AI 記得你是誰、在做什麼、什麼話不能說</td><td class="t">20～40 分鐘</td><td class="l"><span class="lv r">一定要用心</span></td></tr>
+  <tr><td class="page"><a href="03指令卡.html">03 指令卡</a></td><td>一張貼在電腦旁的交辦小抄</td><td class="t">5 分鐘</td><td class="l"><span class="lv y">照做就好</span></td></tr>
+  <tr><td class="page"><a href="04越用越好.html">04 越用越懂你</a></td><td>它做錯一次就記住，下次不再犯</td><td class="t">每次 1 分鐘</td><td class="l"><span class="lv r">一定要用心</span></td></tr>
+  <tr><td class="page"><a href="05自己裝工具.html">05 自己裝工具</a></td><td>需要的工具它自己裝，裝前先給你評估</td><td class="t">5～15 分鐘</td><td class="l"><span class="lv r">一定要用心</span></td></tr>
+  <tr class="star"><td class="page"><a href="06學習助手.html">06 學習助手 ★</a></td><td>丟網址就幫你拆解，每週整理成學習筆記</td><td class="t">每次 5～10 分鐘</td><td class="l"><span class="lv y">照做就好</span></td></tr>
+  <tr><td class="page"><a href="07卡住怎麼辦.html">07 卡住怎麼辦</a></td><td>遇到狀況的急救表，加上怎麼省額度</td><td class="t">需要時看</td><td class="l"><span class="lv g">有需要再看</span></td></tr>
+  <tr><td class="page"><a href="08範例.html">08 範例</a></td><td>三個檔填好長什麼樣，照著對照不怕做錯</td><td class="t">需要時看</td><td class="l"><span class="lv g">有需要再看</span></td></tr>
+</table>
+
+<h2>下載整包</h2>
+<div class="card"><b>用手機的話，先看懂就好</b>：這包要在電腦上用。回到電腦打開這一頁，按下面的按鈕下載，解壓縮後把整個「懶人包」資料夾放進你給 AI 用的資料夾，再照第 01 頁開始。<br><a class="say" href="ai-assistant-pack.zip" download>下載《打造你的 AI 學習助手》整包（zip）</a></div>
+
+<h2>想要更省事？</h2>
+<div class="card">這是輕量版。加強版會變成一位專屬員工：手機一轉就自動讀、影片自動轉逐字稿、照你的目標分類整理。想知道加強版，追蹤 IG @bryanlin_531。</div>
+
+<div class="credit">《打造你的 AI 學習助手》免費入門包・Bryan 的 AI 工作流<br>部分觀念參考小高工具間《AI Agent 入門基礎》免費課（tools.arminkao.com/learn），本包的頁面、例子與做法為自行整理。</div>
+</div>
+</body>
+</html>

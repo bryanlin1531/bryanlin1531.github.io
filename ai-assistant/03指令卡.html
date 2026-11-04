@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一句話指令卡｜Bryan 的 AI 工作流</title>
+<style>
+:root{
+  --bg:#f7f2e9; --card:#fffdf8; --ink:#2b2420; --sub:#6b5f55; --line:#e6dccb;
+  --gold:#b8863b; --gold-soft:#f3e6cc; --red:#b3261e; --red-soft:#fbe9e7; --gray-soft:#efebe5;
+  --yellow:#a86b00; --yellow-soft:#fdf1d6; --blue:#2f5f8a; --blue-soft:#e6eef6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1d1916; --card:#27221e; --ink:#f2ebe1; --sub:#b8ab9c; --line:#3d352e;
+    --gold:#d9aa5f; --gold-soft:#3a2f20; --red:#ff8a80; --red-soft:#3b2220; --gray-soft:#302a25;
+    --yellow:#f0c060; --yellow-soft:#3a3020; --blue:#9cc3e8; --blue-soft:#1f2b36;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-size:17px}
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px 64px}
+a{color:var(--gold)}
+.top{font-size:14px;color:var(--sub)}
+h1{font-size:30px;margin:6px 0 6px}
+.lead{color:var(--sub);margin:0 0 16px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.meta span{background:var(--gray-soft);border-radius:8px;padding:2px 10px;font-size:14px}
+.lv{font-weight:700}
+.meta .lv.r{background:var(--red-soft);color:var(--red)}
+.meta .lv.y{background:var(--yellow-soft);color:var(--yellow)}
+.meta .lv.g{background:var(--gray-soft);color:var(--sub)}
+h2{font-size:21px;margin:34px 0 10px}
+h3{font-size:18px;margin:18px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:10px 0}
+.must{background:var(--red-soft);border:2px solid var(--red);border-radius:14px;padding:14px 20px}
+.must b{color:var(--red)}
+.say{background:var(--gold-soft);border-radius:10px;padding:8px 14px;font-weight:700;display:inline-block;margin:4px 0}
+.ask{background:var(--gold-soft);border-radius:12px;padding:14px 18px;font-weight:600;white-space:pre-line}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.two .card{margin:0}
+.two .card b{display:block;font-size:18px}
+ol.steps{padding-left:0;list-style:none;counter-reset:s;margin:0}
+ol.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px 12px 54px;margin:10px 0;position:relative}
+ol.steps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--bg);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.who{display:inline-block;font-size:13px;border-radius:6px;padding:0 8px;margin-left:6px;background:var(--gold-soft)}
+.ok{display:block;font-size:15px;color:var(--sub)}
+table{width:100%;border-collapse:collapse;font-size:15px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+th{background:var(--gray-soft);font-size:14px;color:var(--sub);font-weight:600}
+tr:last-child td{border-bottom:0}
+ul{padding-left:20px}
+.ai{border:1px dashed var(--gold);border-radius:14px;padding:16px 20px;background:var(--card);font-size:15px;margin-top:34px}
+.ai h2{margin-top:0;font-size:19px}
+code{background:var(--gray-soft);border-radius:4px;padding:0 5px;font-size:.92em}
+.print-card{background:#fff;color:#222;border:2px solid #222;border-radius:12px;padding:18px 22px}
+.print-card h3{margin:14px 0 4px;font-size:16px;border-bottom:1px solid #999}
+.print-card p{margin:3px 0;font-size:16px}
+.print-card p b{display:inline-block;min-width:13em}
+@media (max-width:640px){ .two{grid-template-columns:1fr} h1{font-size:25px} table{display:block;overflow-x:auto} }
+@media print{ body{background:#fff} .noprint{display:none} .wrap{padding:0} .print-card{border:0} }
+.notice{background:var(--blue-soft);border:1px solid var(--blue);border-radius:14px;padding:12px 18px;font-size:15px;margin:0 0 18px}
+.notice b{color:var(--blue)}
+.ai .lbl{display:inline-block;background:var(--ink);color:var(--bg);border-radius:6px;padding:0 8px;font-size:13px;margin-right:6px}
+.credit{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><a href="首頁.html">← 回首頁</a>　·　第 03 頁</div>
+<h1>一句話指令卡</h1>
+<p class="lead">每天交代 AI 員工做事，靠的就是這幾句。印出來放在電腦旁邊，忘了就瞄一眼。</p>
+<div class="meta"><span>誰動手：你自己（印出來）</span><span>約 5 分鐘</span><span class="lv y">照做就好</span></div>
+<div class="notice"><b>用之前先知道</b>：這套要用「能操作電腦的 AI」才做得到（Claude 桌面版的 Code 分頁，或 Claude Code）；網頁版和手機 App 只能聊天，沒辦法幫你動手。每頁要 AI 做的事都寫在頁面上，沒有藏起來的指令。AI 安裝東西、花錢、刪檔前都會先問你；帳號密碼和金鑰一律你自己填，不要貼進對話。</div>
+<p class="ok noprint">按 Ctrl＋P（Mac 是 ⌘＋P）列印，這頁只會印出下面這張卡。</p>
+<div class="print-card">
+  <h3>上班</h3>
+  <p><b>「上次停在哪？」</b>開新對話的第一句</p>
+  <p><b>「開工：懶人包/○○.html」</b>要它照哪一頁做事</p>
+  <h3>學習助手</h3>
+  <p><b>「拆這個：網址」</b>讀別人的內容，挑出適合你的（第 06 頁）</p>
+  <p><b>「拆這個帳號最近 10 支：帳號網址」</b>一次看懂一個帳號的套路</p>
+  <p><b>「整理這週學到的」</b>把這週的學習筆記收成一份重點</p>
+  <h3>交辦</h3>
+  <p><b>「列出做法讓我挑，標你最推薦的」</b>不知道怎麼交代的時候</p>
+  <p><b>「這個工具要不要裝：網址」</b>它先給你安裝評估（第 05 頁）</p>
+  <h3>糾正</h3>
+  <p><b>「寫進去」</b>它做錯了，或你有新習慣要它記住</p>
+  <p><b>「原稿：… 定稿：…」</b>它比對你改了哪裡，記進不要清單（第 04 頁）</p>
+  <p><b>「用白話再說一次」</b>看不懂它在講什麼的時候</p>
+  <h3>下班</h3>
+  <p><b>「回報三件事」</b>做了什麼、哪裡還沒確認、成品在哪裡</p>
+  <p><b>「更新進度，我要換新對話」</b>一件事收尾，換新對話更省額度</p>
+  <p><b>「每週健檢」</b>每週一次，整理這週該記住的事（第 04 頁）</p>
+</div>
+
+<div class="ai">
+  <h2>給 AI 員工的工作單：使用者說「開工：懶人包/03指令卡.html」時</h2>
+  <p class="ok">同一頁的純文字版在 <code>懶人包/給Claude讀/</code>，內容相同，AI 可以直接讀那份。</p>
+  <p><span class="lbl">這樣做</span></p>
+  <ol>
+    <li>用一句話說明這張卡怎麼用，請使用者按 Ctrl＋P（Mac 是 ⌘＋P）印出來。</li>
+    <li>如果工作資料夾裡還沒有 <code>CLAUDE.md</code>，提醒他先做第 02 頁。</li>
+    <li>之後使用者說出卡上任何一句，就照對應的頁面做。卡上沒標頁碼的幾句照 <code>CLAUDE.md</code> 處理：「上次停在哪？」＝讀 <code>進度與下一步.md</code> 後講現況和下一步；「回報三件事」＝照「怎麼回你」的收尾格式；「更新進度，我要換新對話」＝改寫 <code>進度與下一步.md</code> 的現況和下一步，再請他開新對話；「用白話再說一次」＝不用術語、改用生活例子重講；「列出做法讓我挑」＝列 2～3 個做法，各寫差別和代價，標出最推薦的一個。</li>
+  </ol>
+  <p><span class="lbl">交件標準</span>使用者印好這張卡。</p>
+  <p><span class="lbl">紅線</span>替使用者按列印。</p>
+</div>
+
+<div class="credit">《打造你的 AI 學習助手》免費入門包・Bryan 的 AI 工作流<br>部分觀念參考小高工具間《AI Agent 入門基礎》免費課（tools.arminkao.com/learn），本包的頁面、例子與做法為自行整理。</div>
+</div>
+</body>
+</html>
