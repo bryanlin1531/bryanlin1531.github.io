@@ -63,15 +63,39 @@ code{background:var(--gray-soft);border-radius:4px;padding:0 5px;font-size:.92em
 .notice b{color:var(--blue)}
 .ai .lbl{display:inline-block;background:var(--ink);color:var(--bg);border-radius:6px;padding:0 8px;font-size:13px;margin-right:6px}
 .credit{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:34px 0 0}
+.pn a{display:block;text-decoration:none;border-radius:14px;padding:14px 18px;font-weight:700;font-size:18px}
+.pn a span{display:block;font-weight:400;font-size:15px;margin-top:2px}
+.pn .prev{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.pn .next{background:var(--ink);color:var(--bg);text-align:right}
+.pn .next:hover{background:var(--gold)}
+.pn .prev:hover{border-color:var(--gold)}
+.give{background:var(--gold-soft);border:2px solid var(--gold);border-radius:16px;padding:14px 18px;margin:0 0 16px;font-size:16px}
+.give-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.give-text{flex:1 1 300px;background:var(--card);border-radius:10px;padding:10px 14px;font-weight:700;overflow-wrap:anywhere}
+.copy{font:inherit;font-weight:700;background:var(--ink);color:var(--bg);border:0;border-radius:10px;padding:10px 18px;min-height:44px;cursor:pointer}
+.copy:hover{background:var(--gold)}
+.paid{margin-top:34px;background:var(--gold-soft);border:1px solid var(--gold);border-radius:16px;padding:18px 20px}
+.paid h2{margin:0 0 6px;font-size:21px}
+.paid p{margin:0 0 12px}
+.paid td:first-child{font-weight:700;white-space:nowrap}
+@media (max-width:700px){
+  .cmp,.cmp tbody,.paid table,.paid tbody{display:block;width:100%}
+  .cmp tr,.paid tr{display:grid;grid-template-columns:1fr 1fr}
+  .cmp tr>:first-child,.paid tr>:first-child{grid-column:1/-1;white-space:normal}
+  .cmp tr:first-child>:first-child,.paid tr:first-child>:first-child{display:none}
+  .cmp td:first-child,.paid td:first-child{border-bottom:0;padding-bottom:2px}
+}
 
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="top"><a href="首頁.html">← 回首頁</a>　·　第 02 頁</div>
+<div class="top"><a href="首頁.html">← 回首頁</a>　·　基礎課（免費）　第 02 頁</div>
 <h1>開機設定：讓 AI 認識你和你在做的事</h1>
 <p class="lead">AI 會一題一題問你，你照實回答就好。做完之後，就算開新對話，它也知道你是誰、在做什麼、哪些話絕對不能說。</p>
 <div class="meta"><span>誰動手：你回答，AI 寫檔</span><span>約 20～40 分鐘（看你做的事有幾項）</span><span class="lv r">一定要用心</span></div>
+<div class="give"><b>把這一頁交給 Claude</b>：在 Claude 桌面版的 Code 分頁，貼上這一句就好。<div class="give-row"><span class="give-text" id="say">照這頁做：https://bryanlin1531.github.io/ai-assistant/02開機設定.html</span><button class="copy" type="button" data-copy="say">複製這句</button></div></div>
 <div class="notice"><b>用之前先知道</b>：這套要用「能操作電腦的 AI」才做得到（Claude 桌面版的 Code 分頁，或 Claude Code）；網頁版和手機 App 只能聊天，沒辦法幫你動手。每頁要 AI 做的事都寫在頁面上，沒有藏起來的指令。AI 安裝東西、花錢、刪檔前都會先問你；帳號密碼和金鑰一律你自己填，不要貼進對話。</div>
 <div class="must">
   🔴 <b>這是整包最重要的一頁，請你親自用心回答</b>
@@ -123,8 +147,8 @@ code{background:var(--gray-soft);border-radius:4px;padding:0 5px;font-size:.92em
 <div class="card">開一個<b>新對話</b>（資料夾要選<b>同一個</b>），問它：<br><span class="say">說說看，我是做什麼的？</span><br>它講得出你的品牌、在做的事、說話習慣和不能說的話，就成功了。講錯的地方，回原本的對話告訴它「哪裡不對」，它會改。<br>驗收完回原本的對話告訴它結果（「通過」或「哪裡不對」），它會更新進度。<br>之後多了新的事要做，說「我多了一項○○」，它會再問你第二段那 10 題。</div>
 
 <div class="ai">
-  <h2>給 AI 員工的工作單：使用者說「開工：懶人包/02開機設定.html」時</h2>
-  <p class="ok">同一頁的純文字版在 <code>懶人包/給Claude讀/</code>，內容相同，AI 可以直接讀那份。</p>
+  <h2>給 AI 員工的工作單：使用者貼這頁網址、或說「開工：懶人包/02開機設定.html」時</h2>
+  <p class="ok">同一頁的純文字版在 <code>懶人包/給Claude讀/</code>（網址：<code>https://bryanlin1531.github.io/ai-assistant/給Claude讀/02開機設定.md</code>），內容相同，AI 可以直接讀那份。使用者是貼網址給你、工作資料夾裡沒有「懶人包」資料夾時，這頁提到的 <code>懶人包/○○</code> 檔，到 <code>https://bryanlin1531.github.io/ai-assistant/</code> 後面接同樣的路徑讀（不用先下載整包）。</p><p class="ok">這頁做完，告訴使用者下一頁是「03 一句話指令卡」；他說「下一頁」，就讀 <code>https://bryanlin1531.github.io/ai-assistant/給Claude讀/03指令卡.md</code> 照著做。</p>
   <p><span class="lbl">先確認</span>在使用者的工作資料夾裡。<code>CLAUDE.md</code>、<code>我的服務.md</code>、<code>進度與下一步.md</code> 已經存在的，先讀完，只補缺的部分，不整份重寫。</p>
   <p><span class="lbl">這樣做</span></p>
   <ol>
@@ -161,7 +185,19 @@ code{background:var(--gray-soft);border-radius:4px;padding:0 5px;font-size:.92em
   <p><span class="lbl">紅線</span>寫價格；把推論或通用理由寫成使用者說過的話；<code>CLAUDE.md</code> 超過 40 行（細節放 <code>我的服務.md</code>）；規則只寫「不准」卻沒寫理由。</p>
 </div>
 
-<div class="credit">《打造你的 AI 學習助手》免費入門包・Bryan 的 AI 工作流<br>部分觀念參考小高工具間《AI Agent 入門基礎》免費課（tools.arminkao.com/learn），本包的頁面、例子與做法為自行整理。</div>
+<nav class="pn"><a class="prev" href="01安裝.html">← 上一頁<span>01 安裝 Claude，給它一個工作資料夾</span></a><a class="next" href="03指令卡.html">下一頁 →<span>03 一句話指令卡</span></a></nav>
+
+<div class="credit">《打造你的 AI 學習助手》免費課程・Bryan 的 AI 工作流<br>部分觀念參考小高工具間《AI Agent 入門基礎》免費課（tools.arminkao.com/learn），本課程的頁面、例子與做法為自行整理。</div>
 </div>
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.copy).textContent.trim();
+    var done=function(){b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製這句'},2000)};
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){fb(t);done()})}else{fb(t);done()}
+  });
+});
+function fb(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+</script>
 </body>
 </html>

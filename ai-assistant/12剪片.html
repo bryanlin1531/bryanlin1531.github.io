@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>剪片：它先粗剪，你在 CapCut 收尾｜Bryan 的 AI 工作流</title>
+<style>
+:root{
+  --bg:#f7f2e9; --card:#fffdf8; --ink:#2b2420; --sub:#6b5f55; --line:#e6dccb;
+  --gold:#b8863b; --gold-soft:#f3e6cc; --red:#b3261e; --red-soft:#fbe9e7; --gray-soft:#efebe5;
+  --yellow:#a86b00; --yellow-soft:#fdf1d6; --blue:#2f5f8a; --blue-soft:#e6eef6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1d1916; --card:#27221e; --ink:#f2ebe1; --sub:#b8ab9c; --line:#3d352e;
+    --gold:#d9aa5f; --gold-soft:#3a2f20; --red:#ff8a80; --red-soft:#3b2220; --gray-soft:#302a25;
+    --yellow:#f0c060; --yellow-soft:#3a3020; --blue:#9cc3e8; --blue-soft:#1f2b36;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-size:17px}
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px 64px}
+a{color:var(--gold)}
+.top{font-size:14px;color:var(--sub)}
+h1{font-size:30px;margin:6px 0 6px}
+.lead{color:var(--sub);margin:0 0 16px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.meta span{background:var(--gray-soft);border-radius:8px;padding:2px 10px;font-size:14px}
+.lv{font-weight:700}
+.meta .lv.r{background:var(--red-soft);color:var(--red)}
+.meta .lv.y{background:var(--yellow-soft);color:var(--yellow)}
+.meta .lv.g{background:var(--gray-soft);color:var(--sub)}
+h2{font-size:21px;margin:34px 0 10px}
+h3{font-size:18px;margin:18px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:10px 0}
+.must{background:var(--red-soft);border:2px solid var(--red);border-radius:14px;padding:14px 20px}
+.must b{color:var(--red)}
+.say{background:var(--gold-soft);border-radius:10px;padding:8px 14px;font-weight:700;display:inline-block;margin:4px 0}
+.ask{background:var(--gold-soft);border-radius:12px;padding:14px 18px;font-weight:600;white-space:pre-line}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.two .card{margin:0}
+.two .card b{display:block;font-size:18px}
+ol.steps{padding-left:0;list-style:none;counter-reset:s;margin:0}
+ol.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px 12px 54px;margin:10px 0;position:relative}
+ol.steps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--bg);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.who{display:inline-block;font-size:13px;border-radius:6px;padding:0 8px;margin-left:6px;background:var(--gold-soft)}
+.ok{display:block;font-size:15px;color:var(--sub)}
+table{width:100%;border-collapse:collapse;font-size:15px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+th{background:var(--gray-soft);font-size:14px;color:var(--sub);font-weight:600}
+tr:last-child td{border-bottom:0}
+ul{padding-left:20px}
+.ai{border:1px dashed var(--gold);border-radius:14px;padding:16px 20px;background:var(--card);font-size:15px;margin-top:34px}
+.ai h2{margin-top:0;font-size:19px}
+code{background:var(--gray-soft);border-radius:4px;padding:0 5px;font-size:.92em}
+.print-card{background:#fff;color:#222;border:2px solid #222;border-radius:12px;padding:18px 22px}
+.print-card h3{margin:14px 0 4px;font-size:16px;border-bottom:1px solid #999}
+.print-card p{margin:3px 0;font-size:16px}
+.print-card p b{display:inline-block;min-width:13em}
+@media (max-width:640px){ .two{grid-template-columns:1fr} h1{font-size:25px} table{display:block;overflow-x:auto} }
+@media print{ body{background:#fff} .noprint{display:none} .wrap{padding:0} .print-card{border:0} }
+.notice{background:var(--blue-soft);border:1px solid var(--blue);border-radius:14px;padding:12px 18px;font-size:15px;margin:0 0 18px}
+.notice b{color:var(--blue)}
+.ai .lbl{display:inline-block;background:var(--ink);color:var(--bg);border-radius:6px;padding:0 8px;font-size:13px;margin-right:6px}
+.credit{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:34px 0 0}
+.pn a{display:block;text-decoration:none;border-radius:14px;padding:14px 18px;font-weight:700;font-size:18px}
+.pn a span{display:block;font-weight:400;font-size:15px;margin-top:2px}
+.pn .prev{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.pn .next{background:var(--ink);color:var(--bg);text-align:right}
+.pn .next:hover{background:var(--gold)}
+.pn .prev:hover{border-color:var(--gold)}
+.give{background:var(--gold-soft);border:2px solid var(--gold);border-radius:16px;padding:14px 18px;margin:0 0 16px;font-size:16px}
+.give-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.give-text{flex:1 1 300px;background:var(--card);border-radius:10px;padding:10px 14px;font-weight:700;overflow-wrap:anywhere}
+.copy{font:inherit;font-weight:700;background:var(--ink);color:var(--bg);border:0;border-radius:10px;padding:10px 18px;min-height:44px;cursor:pointer}
+.copy:hover{background:var(--gold)}
+.paid{margin-top:34px;background:var(--gold-soft);border:1px solid var(--gold);border-radius:16px;padding:18px 20px}
+.paid h2{margin:0 0 6px;font-size:21px}
+.paid p{margin:0 0 12px}
+.paid td:first-child{font-weight:700;white-space:nowrap}
+@media (max-width:700px){
+  .cmp,.cmp tbody,.paid table,.paid tbody{display:block;width:100%}
+  .cmp tr,.paid tr{display:grid;grid-template-columns:1fr 1fr}
+  .cmp tr>:first-child,.paid tr>:first-child{grid-column:1/-1;white-space:normal}
+  .cmp tr:first-child>:first-child,.paid tr:first-child>:first-child{display:none}
+  .cmp td:first-child,.paid td:first-child{border-bottom:0;padding-bottom:2px}
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><a href="首頁.html">← 回首頁</a>　·　進階課　第 12 頁</div>
+<h1>剪片：它先粗剪，你在 CapCut 收尾</h1>
+<p class="lead">你拍完把影片丟進資料夾，AI 先把停頓、念錯、重來的地方剪掉，再做好字幕。你在 CapCut 只要加音樂、貼紙、封面。</p>
+<div class="meta"><span>誰動手：AI 粗剪，你在 CapCut 收尾</span><span>第一次裝工具約 20 分鐘；之後每支約 10 分鐘</span><span class="lv y">照做就好</span></div>
+<div class="give"><b>把這一頁交給 Claude</b>：在 Claude 桌面版的 Code 分頁，貼上這一句就好。<div class="give-row"><span class="give-text" id="say">照這頁做：https://bryanlin1531.github.io/ai-assistant/12剪片.html</span><button class="copy" type="button" data-copy="say">複製這句</button></div></div>
+<div class="notice"><b>用之前先知道</b>：這套要用「能操作電腦的 AI」才做得到（Claude 桌面版的 Code 分頁，或 Claude Code）；網頁版和手機 App 只能聊天，沒辦法幫你動手。每頁要 AI 做的事都寫在頁面上，沒有藏起來的指令。AI 安裝東西、花錢、刪檔前都會先問你；帳號密碼和金鑰一律你自己填，不要貼進對話。</div>
+<div class="must">
+  🔴 <b>這頁要你自己做的 2 件事</b>
+  <ul>
+    <li><b>字幕錯字要自己看一遍</b>：特別是人名、品牌名、專業用語，轉字幕最常錯在這裡。</li>
+    <li><b>音樂用 CapCut 裡標「商用」的</b>：做生意的帳號，挑有商用標示的比較安全。</li>
+  </ul>
+</div>
+
+<h2>拍的時候就幫自己省時間</h2>
+<div class="card"><b>停一秒再講</b>：看完稿停一秒再講，講完停一秒。念錯不用停，直接從那句重講。剪的時候 AI 會留下最後一次講好的那句。</div>
+
+<h2>步驟</h2>
+<ol class="steps">
+  <li>第一次先說 <span class="say">我要用第 12 頁粗剪，幫我裝需要的工具</span><span class="who">AI 裝，你按同意</span><span class="ok">會裝 ffmpeg、Python、faster-whisper，照第 05 頁先給你看安裝評估。</span></li>
+  <li>把拍好的影片放進工作資料夾的「待剪」資料夾<span class="who">你</span></li>
+  <li>說 <span class="say">粗剪 待剪 資料夾的影片，腳本是 收納盒</span><span class="who">AI</span><span class="ok">它把影片轉成文字，對照腳本，剪掉停頓和念錯重來的地方。</span></li>
+  <li>它交給你兩個檔：<code>粗剪.mp4</code>、<code>字幕.srt</code>，還有一張表告訴你剪掉了哪幾段<span class="who">你看一遍</span></li>
+  <li>打開 CapCut：匯入 <code>粗剪.mp4</code> → 匯入字幕檔 <code>字幕.srt</code> → 加音樂、片尾導流貼紙、封面 → 匯出<span class="who">你</span><span class="ok">不想用它的字幕，也可以直接用 CapCut 的自動字幕。</span></li>
+</ol>
+
+<h2>不想裝工具也可以</h2>
+<div class="card">只用 CapCut：自動字幕＋手動剪掉停頓。比較花時間，但什麼都不用裝。等你剪片剪到煩了，再回來裝。</div>
+
+<div class="ai">
+  <h2>給 AI：使用者說「粗剪」時</h2>
+  <p class="ok">同一頁的純文字版在 <code>懶人包/給Claude讀/</code>（網址：<code>https://bryanlin1531.github.io/ai-assistant/給Claude讀/12剪片.md</code>），內容相同，AI 可以直接讀那份。使用者是貼網址給你、工作資料夾裡沒有「懶人包」資料夾時，這頁提到的 <code>懶人包/○○</code> 檔，到 <code>https://bryanlin1531.github.io/ai-assistant/</code> 後面接同樣的路徑讀（不用先下載整包）。</p><p class="ok">這頁做完，告訴使用者下一頁是「13 動態字卡片：口白配插畫動畫」；他說「下一頁」，就讀 <code>https://bryanlin1531.github.io/ai-assistant/給Claude讀/13動態字卡片.md</code> 照著做。</p>
+  <p><b>準備</b>：確認電腦有 ffmpeg、Python、faster-whisper；沒有就照第 05 頁先給安裝評估再裝。找到「待剪」資料夾的影片和使用者指定的腳本。</p>
+  <ol>
+    <li>用 faster-whisper 把影片轉成有時間碼的逐字稿（語言設中文，<code>language="zh"</code>；電腦沒有獨立顯卡就用 CPU）。</li>
+    <li>對照腳本找出：①念錯重來的段落：同一句講了好幾次，只留最後一次完整的 ②超過 0.6 秒的停頓 ③開頭結尾的空白。列成表（時間、內容、剪或留）給使用者看，他說好再剪。</li>
+    <li>用 ffmpeg 依表剪接，輸出 <code>成品/粗剪/○○_粗剪.mp4</code>（直式 1080×1920，聲音保持原樣）。</li>
+    <li>依剪後的時間重新產生 <code>○○_字幕.srt</code>：每行 14 字內，專有名詞照腳本寫法校正，對不準的標出來請使用者確認。</li>
+    <li>自己檢查：粗剪片從頭到尾抽幾個時間點看畫面和聲音是否接得順、字幕時間有沒有錯位，再回報。</li>
+  </ol>
+  <p><b>完成</b>：粗剪片和字幕檔都在，使用者在 CapCut 匯入後字幕對得上。</p>
+  <p><b>不要</b>：刪掉或覆蓋使用者的原始影片（原檔一律留著）；沒給使用者看剪輯表就直接剪；加網路上的音樂。</p>
+</div>
+
+<nav class="pn"><a class="prev" href="11封面美編.html">← 上一頁<span>11 封面與美編：說一句，它做成圖</span></a><a class="next" href="13動態字卡片.html">下一頁 →<span>13 動態字卡片：口白配插畫動畫</span></a></nav>
+<div class="paid"><h2>免費版和加強版差在哪</h2><p>這一頁的做法免費版就做得到。想再省時間，可以看看付費的加強版，要不要升級由你決定。</p><table><tr><th></th><th>免費課程</th><th>加強版（付費）</th></tr><tr><td>丟內容給 AI</td><td>回電腦複製網址，貼給 AI</td><td>手機一轉就自動讀</td></tr><tr><td>影片</td><td>先讀說明文字；要聽內容，照第 05 頁自己裝轉文字工具</td><td>影片自動轉逐字稿</td></tr><tr><td>整理筆記</td><td>每週說一次「整理這週學到的」</td><td>照你的目標分類整理</td></tr><tr><td>怎麼開始</td><td>現在就能用，不用付錢</td><td>追蹤 IG <a href="https://www.instagram.com/bryanlin_531/">@bryanlin_531</a>，私訊「加強版」了解內容和價格</td></tr></table></div>
+<div class="credit">《打造你的 AI 學習助手》免費課程・Bryan 的 AI 工作流<br>部分觀念參考小高工具間《AI Agent 入門基礎》免費課（tools.arminkao.com/learn），本課程的頁面、例子與做法為自行整理。</div>
+</div>
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.copy).textContent.trim();
+    var done=function(){b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製這句'},2000)};
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){fb(t);done()})}else{fb(t);done()}
+  });
+});
+function fb(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+</script>
+</body>
+</html>

@@ -4,99 +4,285 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>打造你的 AI 學習助手｜Bryan 的 AI 工作流</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f7f2e9; --card:#fffdf8; --ink:#2b2420; --sub:#6b5f55; --line:#e6dccb;
-  --gold:#b8863b; --gold-soft:#f3e6cc; --red:#b3261e; --red-soft:#fbe9e7;
-  --yellow:#a86b00; --yellow-soft:#fdf1d6; --gray-soft:#efebe5; --blue:#2f5f8a; --blue-soft:#e6eef6;
+  --bg:#f7f2e9; --card:#fffdf8; --ink:#2b2420; --sub:#62574d; --line:#e6dccb;
+  --gold:#9a6c27; --gold-soft:#f3e6cc; --gold-deep:#7a521a;
+  --band:#2b2420; --band-ink:#f7f2e9; --band-sub:#d9ccb9; --band-gold:#e8bf78;
+  --red:#b3261e; --red-soft:#fbe9e7; --yellow:#8a5800; --yellow-soft:#fdf1d6; --gray-soft:#efebe5;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#1d1916; --card:#27221e; --ink:#f2ebe1; --sub:#b8ab9c; --line:#3d352e;
-    --gold:#d9aa5f; --gold-soft:#3a2f20; --red:#ff8a80; --red-soft:#3b2220;
-    --yellow:#f0c060; --yellow-soft:#3a3020; --gray-soft:#302a25; --blue:#9cc3e8; --blue-soft:#1f2b36;
+    --bg:#1d1916; --card:#27221e; --ink:#f2ebe1; --sub:#c2b5a6; --line:#3d352e;
+    --gold:#e0b46a; --gold-soft:#3a2f20; --gold-deep:#f0cf96;
+    --band:#0f0c0a; --band-ink:#f7f2e9; --band-sub:#c9bba8; --band-gold:#e8bf78;
+    --red:#ff8a80; --red-soft:#3b2220; --yellow:#f0c060; --yellow-soft:#3a3020; --gray-soft:#302a25;
   }
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.7;font-size:17px}
-.wrap{max-width:880px;margin:0 auto;padding:32px 16px 64px}
-header{text-align:center;padding:16px 0 8px}
-.tag{display:inline-block;font-size:13px;color:var(--gold);border:1px solid var(--gold);border-radius:99px;padding:2px 12px;letter-spacing:.1em}
-h1{font-size:34px;margin:12px 0 4px;letter-spacing:.04em}
-.lead{color:var(--sub);margin:0}
-h2{font-size:22px;margin:40px 0 12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-.notice{background:var(--blue-soft);border:1px solid var(--blue);border-radius:14px;padding:14px 20px;font-size:15px}
-.notice b{color:var(--blue)}
-.say{display:inline-block;background:var(--gold-soft);border-radius:10px;padding:6px 14px;font-weight:700;margin:4px 0}
-ol.how{padding-left:22px;margin:0}
-ol.how li{margin:8px 0}
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
-th{background:var(--gray-soft);font-size:14px;color:var(--sub);font-weight:600}
-tr:last-child td{border-bottom:0}
-td.page{white-space:nowrap;font-weight:700}
-td.page a{color:var(--ink);text-decoration:none}
-.lv{display:inline-block;border-radius:6px;padding:1px 8px;font-size:13px;white-space:nowrap;font-weight:700}
+::selection{background:var(--band-gold);color:#2b2420}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.7;font-size:18px}
+a{color:var(--gold-deep);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+.serif{font-family:"Noto Serif TC","PingFang TC",serif}
+
+/* 深色主視覺：一句話就是主角 */
+.hero{background:var(--band);color:var(--band-ink);padding:56px 0 52px}
+.hero h1{font-size:clamp(40px,7.4vw,72px);font-weight:900;line-height:1.12;margin:0 0 14px;text-wrap:balance}
+.hero .lead{font-size:clamp(19px,2.4vw,23px);color:var(--band-sub);margin:0 0 36px;max-width:38em}
+.hero .label{font-size:19px;font-weight:700;color:var(--band-gold);margin:0 0 10px}
+.say{display:flex;gap:14px;align-items:stretch;flex-wrap:wrap}
+.say-text{flex:1 1 360px;background:rgba(255,255,255,.07);border:2px solid var(--band-gold);border-radius:16px;padding:18px 20px;font-size:clamp(20px,2.6vw,25px);font-weight:700;overflow-wrap:anywhere;line-height:1.5}
+.copy{font:inherit;font-size:19px;font-weight:900;background:var(--band-gold);color:#2b2420;border:0;border-radius:16px;padding:0 28px;min-height:60px;cursor:pointer}
+.copy:hover{background:#f3d29c}
+.hero .note{margin:16px 0 0;color:var(--band-sub);font-size:16px}
+
+/* 你做 / Claude 做 */
+h2{font-size:clamp(28px,3.8vw,38px);font-weight:900;margin:64px 0 20px;line-height:1.3}
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lane{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 26px}
+.lane.ai{background:var(--gold-soft);border-color:var(--gold)}
+.lane h3{margin:0 0 14px;font-size:24px}
+.lane ol{margin:0;padding:0;list-style:none;counter-reset:s}
+.lane li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:10px;margin:0 0 16px;font-size:18px}
+.lane li:last-child{margin-bottom:0}
+.lane li::before{content:counter(s);font-family:"Noto Serif TC",serif;font-weight:900;font-size:30px;line-height:1.1;color:var(--gold)}
+.lane li b{display:block;font-size:20px}
+.lane li span{color:var(--sub);font-size:16px}
+.phone{margin-top:16px;font-size:17px;color:var(--sub)}
+.phone b{color:var(--ink)}
+
+/* 八頁 */
+.pages{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.pages li{border-bottom:1px solid var(--line)}
+.pages a{display:grid;grid-template-columns:70px 1fr auto;gap:16px;align-items:center;padding:16px 4px;color:var(--ink);text-decoration:none}
+.pages a:hover{background:var(--card)}
+.pages .n{font-family:"Noto Serif TC",serif;font-weight:900;font-size:34px;color:var(--gold);line-height:1}
+.pages .t{font-size:21px;font-weight:900;display:block}
+.pages .d{color:var(--sub);font-size:16px}
+.pages .m{text-align:right;font-size:15px;color:var(--sub);white-space:nowrap}
+.lv{display:inline-block;border-radius:7px;padding:1px 9px;font-size:14px;font-weight:700;margin-top:4px}
 .lv.r{background:var(--red-soft);color:var(--red)}
 .lv.y{background:var(--yellow-soft);color:var(--yellow)}
 .lv.g{background:var(--gray-soft);color:var(--sub)}
-.star{background:var(--gold-soft)}
-.credit{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
-@media (max-width:640px){
-  h1{font-size:27px}
-  table.pages,table.pages tbody,table.pages tr,table.pages td{display:block;width:100%}
-  table.pages tr:first-child{display:none}
-  table.pages tr{border-bottom:1px solid var(--line);padding:12px 14px}
-  table.pages tr:last-child{border-bottom:0}
-  table.pages td{border:0;padding:2px 0}
-  table.pages td.page{font-size:17px}
-  table.pages td.t{display:inline-block;width:auto;margin-right:10px;color:var(--sub);font-size:14px}
-  table.pages td.l{display:inline-block;width:auto}
+.pages .star{background:var(--gold-soft)}
+
+/* 給 Claude 看 */
+.aibox{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 26px}
+.aibox p.intro{margin:0 0 12px;color:var(--sub);font-size:17px}
+.aibox ol{margin:0;padding-left:24px}
+.aibox li{margin:10px 0}
+.aibox code{font-family:Consolas,"Cascadia Mono",monospace;font-size:.88em;background:var(--gray-soft);border-radius:6px;padding:2px 7px;word-break:break-all}
+
+.foot{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 24px;font-size:17px}
+.box h3{margin:0 0 6px;font-size:21px}
+.dl{display:inline-block;margin-top:10px;background:var(--gold-soft);color:var(--ink);font-weight:700;border-radius:10px;padding:8px 16px;text-decoration:none}
+.credit{margin:56px 0 0;padding:16px 0 64px;border-top:1px solid var(--line);font-size:14px;color:var(--sub)}
+
+@media (max-width:700px){
+  .hero{padding:40px 0 40px}
+  .copy{width:100%;min-height:54px}
+  .lanes,.foot{grid-template-columns:1fr}
+  .pages a{grid-template-columns:48px 1fr;gap:12px}
+  .pages .n{font-size:28px}
+  .pages .m{grid-column:2;text-align:left}
+  .lane,.aibox{padding:20px 18px}
+}
+
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:58px;padding:0 28px;border-radius:16px;font-weight:900;font-size:19px;text-decoration:none}
+.btn.main{background:var(--band-gold);color:#2b2420}
+.btn.main:hover{background:#f3d29c}
+.btn.ghost{border:2px solid var(--band-gold);color:var(--band-ink)}
+.learn{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.learn li{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 22px}
+.learn b{display:block;font-size:21px;line-height:1.4;margin-bottom:6px}
+.learn span{color:var(--sub);font-size:16px}
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fit .box ul{margin:6px 0 0;padding-left:20px}
+.fit .box li{margin:4px 0}
+.how{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:h}
+.how li{counter-increment:h;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
+.how li::before{content:counter(h);display:block;font-family:"Noto Serif TC",serif;font-weight:900;font-size:44px;line-height:1;color:var(--gold);margin-bottom:8px}
+.how b{display:block;font-size:20px;margin-bottom:4px}
+.how span{color:var(--sub);font-size:16px}
+.courses{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.course{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 26px;display:flex;flex-direction:column}
+.course.adv{background:var(--gold-soft);border-color:var(--gold)}
+.course .lbl{display:inline-block;align-self:flex-start;font-size:15px;font-weight:700;border-radius:8px;padding:2px 12px;background:var(--gold-soft);color:var(--gold-deep)}
+.course.adv .lbl{background:var(--card)}
+.course h3{font-size:28px;margin:12px 0 4px;font-family:"Noto Serif TC",serif}
+.course .rng{color:var(--sub);font-size:16px;margin:0 0 10px}
+.course p{margin:0 0 12px}
+.course ol{margin:0 0 16px;padding-left:28px;font-size:17px}
+.course ol li{margin:3px 0}
+.course ol a{color:var(--ink)}
+.course .go{margin-top:auto;display:block;text-align:center;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:900;font-size:18px;border-radius:14px;padding:14px}
+.course .go:hover{background:var(--gold-deep)}
+.course .soon{font-size:15px;color:var(--sub);margin:-6px 0 14px}
+.got{background:var(--gold-soft);border-radius:14px;padding:14px 18px;margin:0 0 16px;display:grid;gap:4px;font-size:16px}
+.got b{font-size:17px}
+.got span::before{content:"✓ ";color:var(--gold-deep);font-weight:900}
+.quick{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 24px}
+.quick p{margin:0 0 10px}
+.quick .say-text{background:var(--gold-soft);border:0;color:var(--ink)}
+.quick .copy{background:var(--ink);color:var(--bg)}
+.cmp{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;font-size:18px}
+.cmp th,.cmp td{padding:16px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp th{font-size:20px}
+.cmp th.p,.cmp td.p{background:var(--gold-soft)}
+.cmp td:first-child{font-weight:700;color:var(--sub);white-space:nowrap}
+.cmp-note{margin:14px 0 0;font-size:17px;color:var(--sub)}
+@media (max-width:700px){
+  .learn,.how,.courses,.fit{grid-template-columns:1fr}
+  .btn{width:100%}
+  .cmp{font-size:16px}
+  .cmp,.cmp tbody{display:block;width:100%}
+  .cmp tr{display:grid;grid-template-columns:1fr 1fr}
+  .cmp tr>:first-child{grid-column:1/-1;white-space:normal}
+  .cmp tr:first-child>:first-child{display:none}
+  .cmp td:first-child{border-bottom:0;padding-bottom:2px}
+  .cmp th,.cmp td{padding:12px 10px}
+}
+
+.hero{padding:72px 0 64px}
+.hero .kick{font-size:20px;color:var(--band-gold);font-weight:700;margin:0 0 14px}
+.hero h1{font-size:clamp(42px,7.6vw,80px)}
+.hero .lead{font-size:clamp(20px,2.6vw,25px);max-width:30em}
+.pain{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.hero .fee{margin:16px 0 0;color:var(--band-sub);font-size:17px}
+.pain li{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;font-size:20px;font-weight:700;line-height:1.5}
+.pain li span{display:block;font-size:16px;font-weight:400;color:var(--sub);margin-top:8px}
+.turn{margin:40px 0 0;background:var(--band);color:var(--band-ink);border-radius:24px;padding:36px 34px}
+.turn h2{margin:0 0 20px;color:var(--band-ink)}
+.turn ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+.turn li{font-size:20px;line-height:1.5;padding-left:34px;position:relative}
+.turn li::before{content:"→";position:absolute;left:0;color:var(--band-gold);font-weight:900}
+.turn li span{display:block;font-size:16px;color:var(--band-sub)}
+.final{margin:64px 0 0;text-align:center;background:var(--gold-soft);border:1px solid var(--gold);border-radius:24px;padding:44px 24px}
+.final h2{margin:0 0 10px}
+.final p{margin:0 0 22px;color:var(--sub);font-size:19px}
+.final .btn{background:var(--ink);color:var(--bg)}
+.final .btn:hover{background:var(--gold-deep)}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;list-style:none;margin:0;padding:0;counter-reset:t}
+.three li{counter-increment:t;display:flex;gap:14px;align-items:baseline;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px;font-size:19px;font-weight:700}
+.three li::before{content:counter(t);font-family:"Noto Serif TC",serif;font-weight:900;font-size:34px;color:var(--gold);line-height:1}
+.three li span{display:block;font-size:15px;font-weight:400;color:var(--sub)}
+@media (max-width:700px){
+  .hero{padding:48px 0 44px}
+  .pain,.turn ul,.three{grid-template-columns:1fr}
+  .turn{padding:28px 20px}
 }
 </style>
 </head>
 <body>
+
+<section class="hero">
 <div class="wrap">
-<header>
-  <span class="tag">免費入門包</span>
-  <h1>打造你的 AI 學習助手</h1>
-  <p class="lead">滑到好內容就丟給它：它讀完、拆好、挑出適合你的，記成你自己的規則。</p>
-</header>
+  <p class="kick">Bryan 的 AI 工作流・免費課程</p>
+  <h1 class="serif">你在跟 AI 聊天，<br>別人讓 AI 上班。</h1>
+  <p class="lead">我是 Bryan，每天讓 AI 秘書幫我寫貼文、做簡報、剪短片。這 16 堂課，就是我怎麼教它做事，不用會寫程式。</p>
+  <div class="btns">
+    <a class="btn main" href="01安裝.html">免費開始上課</a>
+    <a class="btn ghost" href="#courses">看有哪些課</a>
+  </div>
+  <p class="fee">課程免費・上課要用 Claude Pro（付費訂閱）</p>
+</div>
+</section>
 
-<h2>用之前先知道</h2>
-<div class="notice"><b>要用「能操作電腦的 AI」</b>：Claude 桌面版的 Code 分頁，或 Claude Code（要 Pro 以上方案）。網頁版和手機 App 只能聊天，沒辦法照這包做事。<br>
-<b>每頁要 AI 做的事都寫在頁面上</b>，沒有藏起來的指令，你可以先讀過再交給它。AI 安裝東西、花錢、刪檔前都會先問你；帳號密碼和金鑰一律你自己填，不要貼進對話。</div>
+<div class="wrap">
+<h2 class="serif">你是不是也這樣？</h2>
+<ul class="pain">
+  <li>每次開新對話，都要重講一次自己是誰<span>講了三遍，它還是寫出不像你的東西。</span></li>
+  <li>收藏了一堆好內容，從來沒回頭看<span>看的時候覺得有用，存起來就忘了。</span></li>
+  <li>想拍片，卻卡在不知道拍什麼<span>好不容易想到題目，腳本又寫不出口。</span></li>
+  <li>糾正過它的地方，下次照樣錯<span>換一個對話，又從頭教一次。</span></li>
+</ul>
 
-<h2>怎麼開始</h2>
-<div class="card">
-<ol class="how">
-  <li>照第 01 頁裝好 Claude 桌面版，建一個資料夾當 AI 的辦公桌，把整個「懶人包」資料夾放進去。</li>
-  <li>在 Claude 的 Code 分頁選這個資料夾，打：<br><span class="say">開工：懶人包/02開機設定.html</span></li>
-  <li>之後要它照哪一頁做，就說「開工：懶人包/頁名.html」。</li>
-</ol>
+<div class="turn">
+  <h2 class="serif">上完課，它會變成這樣</h2>
+  <ul>
+    <li>開新對話，它就知道你是誰<span>連你哪些話不能說都記得。</span></li>
+    <li>看到好內容，丟網址給它就好<span>它讀完、拆好，挑出適合你的方法。</span></li>
+    <li>沒題目的時候，說一句「找題」<span>10 個題目，連下週拍哪幾支都排好。</span></li>
+    <li>腳本、封面、粗剪交給它先做<span>你挑一個、改幾句，再自己按發布。</span></li>
+  </ul>
 </div>
 
-<h2>八頁內容</h2>
-<table class="pages">
-  <tr><th>頁</th><th>做完你會有什麼</th><th>時間</th><th>重要程度</th></tr>
-  <tr><td class="page"><a href="01安裝.html">01 安裝</a></td><td>一位只在你指定資料夾裡做事的 AI 員工</td><td class="t">15 分鐘</td><td class="l"><span class="lv y">照做就好</span></td></tr>
-  <tr><td class="page"><a href="02開機設定.html">02 開機設定</a></td><td>AI 記得你是誰、在做什麼、什麼話不能說</td><td class="t">20～40 分鐘</td><td class="l"><span class="lv r">一定要用心</span></td></tr>
-  <tr><td class="page"><a href="03指令卡.html">03 指令卡</a></td><td>一張貼在電腦旁的交辦小抄</td><td class="t">5 分鐘</td><td class="l"><span class="lv y">照做就好</span></td></tr>
-  <tr><td class="page"><a href="04越用越好.html">04 越用越懂你</a></td><td>它做錯一次就記住，下次不再犯</td><td class="t">每次 1 分鐘</td><td class="l"><span class="lv r">一定要用心</span></td></tr>
-  <tr><td class="page"><a href="05自己裝工具.html">05 自己裝工具</a></td><td>需要的工具它自己裝，裝前先給你評估</td><td class="t">5～15 分鐘</td><td class="l"><span class="lv r">一定要用心</span></td></tr>
-  <tr class="star"><td class="page"><a href="06學習助手.html">06 學習助手 ★</a></td><td>丟網址就幫你拆解，每週整理成學習筆記</td><td class="t">每次 5～10 分鐘</td><td class="l"><span class="lv y">照做就好</span></td></tr>
-  <tr><td class="page"><a href="07卡住怎麼辦.html">07 卡住怎麼辦</a></td><td>遇到狀況的急救表，加上怎麼省額度</td><td class="t">需要時看</td><td class="l"><span class="lv g">有需要再看</span></td></tr>
-  <tr><td class="page"><a href="08範例.html">08 範例</a></td><td>三個檔填好長什麼樣，照著對照不怕做錯</td><td class="t">需要時看</td><td class="l"><span class="lv g">有需要再看</span></td></tr>
+<h2 class="serif" id="courses">課程裡有什麼</h2>
+<div class="courses">
+  <div class="course">
+    <span class="lbl">免費</span>
+    <h3>基礎課</h3>
+    <p class="rng">5 堂課・約 1～2 小時</p>
+    <p>裝好 Claude、讓它認識你，再學會怎麼交辦、怎麼糾正它。</p>
+    <ol>
+      <li><a href="01安裝.html">安裝 Claude</a></li>
+      <li><a href="02開機設定.html">開機設定：讓 AI 認識你</a></li>
+      <li><a href="03指令卡.html">一句話指令卡</a></li>
+      <li><a href="04越用越好.html">越用越懂你</a></li>
+      <li><a href="05自己裝工具.html">讓它自己裝工具</a></li>
+    </ol>
+    <div class="got"><b>上完這 5 堂，你會有</b>
+      <span>一位只在你資料夾裡做事的 AI 員工</span>
+      <span>它開工前一定先讀的兩份檔：你是誰、你在做什麼</span>
+      <span>貼在電腦旁的指令卡</span>
+      <span>它記住你改過的地方，不再犯</span>
+    </div>
+    <a class="go" href="01安裝.html">從第 01 課開始 →</a>
+  </div>
+  <div class="course adv">
+    <span class="lbl">免費內容＋可選加強版</span>
+    <h3>進階課</h3>
+    <p class="rng">11 堂課・基礎課上完再來</p>
+    <p>讓你的 AI 員工幫你學別人、做短影音，從找題目一路到發片和看數據。</p>
+    <ol start="6">
+      <li><a href="06學習助手.html">學習助手：丟網址幫你拆解</a></li>
+      <li><a href="07卡住怎麼辦.html">卡住怎麼辦、怎麼省額度</a></li>
+      <li><a href="08範例.html">範例：填好長什麼樣</a></li>
+      <li><a href="09找題目.html">找題目、排下週要拍的</a></li>
+      <li><a href="10寫腳本.html">寫腳本</a></li>
+      <li><a href="11封面美編.html">封面與美編</a></li>
+      <li><a href="12剪片.html">剪片</a></li>
+      <li><a href="13動態字卡片.html">動態字卡片</a></li>
+      <li><a href="14發片與導流.html">發片與導流到 LINE</a></li>
+      <li><a href="15下廣告建議.html">下廣告建議</a></li>
+      <li><a href="16看數據.html">看數據</a></li>
+    </ol>
+    <a class="go" href="06學習助手.html">看第 06 課 →</a>
+  </div>
+</div>
+
+<h2 class="serif">開始只要三步</h2>
+<ol class="three">
+  <li><div>裝好 Claude 桌面版<span>需要 Claude Pro（付費訂閱），Windows、Mac 都可以</span></div></li>
+  <li><div>複製每一課的那一句<span>貼給 Claude，它就照那一課做</span></div></li>
+  <li><div>做完按下一頁<span>一次一課，不用一口氣學完</span></div></li>
+</ol>
+
+<h2 class="serif">免費的，夠用嗎？</h2>
+<table class="cmp">
+  <tr><th></th><th>免費課程</th><th class="p">加強版（付費）</th></tr>
+  <tr><td>丟內容給 AI</td><td>回電腦複製網址，貼給它</td><td class="p">手機一轉就自動讀</td></tr>
+  <tr><td>影片</td><td>先讀說明文字，要聽內容自己裝工具</td><td class="p">影片自動轉逐字稿</td></tr>
+  <tr><td>整理筆記</td><td>每週說一次「整理這週學到的」</td><td class="p">照你的目標分類整理</td></tr>
+  <tr><td>費用</td><td>課程免費；Claude Pro 訂閱自己付</td><td class="p">私訊詢問</td></tr>
 </table>
+<p class="cmp-note">16 堂課的內容全部免費（Claude Pro 訂閱費另計），照著做就用得起來。想再省時間，追蹤 IG <a href="https://www.instagram.com/bryanlin_531/">@bryanlin_531</a> 私訊「加強版」，要不要升級由你決定。</p>
 
-<h2>下載整包</h2>
-<div class="card"><b>用手機的話，先看懂就好</b>：這包要在電腦上用。回到電腦打開這一頁，按下面的按鈕下載，解壓縮後把整個「懶人包」資料夾放進你給 AI 用的資料夾，再照第 01 頁開始。<br><a class="say" href="ai-assistant-pack.zip" download>下載《打造你的 AI 學習助手》整包（zip）</a></div>
+<div class="final">
+  <h2 class="serif">今天先上第 01 課</h2>
+  <p>15 分鐘，裝好你的第一位 AI 員工。</p>
+  <a class="btn" href="01安裝.html">免費開始上課 →</a>
+</div>
 
-<h2>想要更省事？</h2>
-<div class="card">這是輕量版。加強版會變成一位專屬員工：手機一轉就自動讀、影片自動轉逐字稿、照你的目標分類整理。想知道加強版，追蹤 IG @bryanlin_531。</div>
-
-<div class="credit">《打造你的 AI 學習助手》免費入門包・Bryan 的 AI 工作流<br>部分觀念參考小高工具間《AI Agent 入門基礎》免費課（tools.arminkao.com/learn），本包的頁面、例子與做法為自行整理。</div>
+<div class="credit">《打造你的 AI 學習助手》免費課程・Bryan 的 AI 工作流<br>部分觀念參考小高工具間《AI Agent 入門基礎》免費課（tools.arminkao.com/learn），本課程的頁面、例子與做法為自行整理。</div>
 </div>
 </body>
 </html>

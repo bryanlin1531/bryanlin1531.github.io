@@ -63,25 +63,59 @@ code{background:var(--gray-soft);border-radius:4px;padding:0 5px;font-size:.92em
 .notice b{color:var(--blue)}
 .ai .lbl{display:inline-block;background:var(--ink);color:var(--bg);border-radius:6px;padding:0 8px;font-size:13px;margin-right:6px}
 .credit{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:34px 0 0}
+.pn a{display:block;text-decoration:none;border-radius:14px;padding:14px 18px;font-weight:700;font-size:18px}
+.pn a span{display:block;font-weight:400;font-size:15px;margin-top:2px}
+.pn .prev{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.pn .next{background:var(--ink);color:var(--bg);text-align:right}
+.pn .next:hover{background:var(--gold)}
+.pn .prev:hover{border-color:var(--gold)}
+.give{background:var(--gold-soft);border:2px solid var(--gold);border-radius:16px;padding:14px 18px;margin:0 0 16px;font-size:16px}
+.give-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.give-text{flex:1 1 300px;background:var(--card);border-radius:10px;padding:10px 14px;font-weight:700;overflow-wrap:anywhere}
+.copy{font:inherit;font-weight:700;background:var(--ink);color:var(--bg);border:0;border-radius:10px;padding:10px 18px;min-height:44px;cursor:pointer}
+.copy:hover{background:var(--gold)}
+.paid{margin-top:34px;background:var(--gold-soft);border:1px solid var(--gold);border-radius:16px;padding:18px 20px}
+.paid h2{margin:0 0 6px;font-size:21px}
+.paid p{margin:0 0 12px}
+.paid td:first-child{font-weight:700;white-space:nowrap}
+@media (max-width:700px){
+  .cmp,.cmp tbody,.paid table,.paid tbody{display:block;width:100%}
+  .cmp tr,.paid tr{display:grid;grid-template-columns:1fr 1fr}
+  .cmp tr>:first-child,.paid tr>:first-child{grid-column:1/-1;white-space:normal}
+  .cmp tr:first-child>:first-child,.paid tr:first-child>:first-child{display:none}
+  .cmp td:first-child,.paid td:first-child{border-bottom:0;padding-bottom:2px}
+}
 
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="top"><a href="首頁.html">← 回首頁</a>　·　第 03 頁</div>
+<div class="top"><a href="首頁.html">← 回首頁</a>　·　基礎課（免費）　第 03 頁</div>
 <h1>一句話指令卡</h1>
 <p class="lead">每天交代 AI 員工做事，靠的就是這幾句。印出來放在電腦旁邊，忘了就瞄一眼。</p>
 <div class="meta"><span>誰動手：你自己（印出來）</span><span>約 5 分鐘</span><span class="lv y">照做就好</span></div>
+<div class="give"><b>把這一頁交給 Claude</b>：在 Claude 桌面版的 Code 分頁，貼上這一句就好。<div class="give-row"><span class="give-text" id="say">照這頁做：https://bryanlin1531.github.io/ai-assistant/03指令卡.html</span><button class="copy" type="button" data-copy="say">複製這句</button></div></div>
 <div class="notice"><b>用之前先知道</b>：這套要用「能操作電腦的 AI」才做得到（Claude 桌面版的 Code 分頁，或 Claude Code）；網頁版和手機 App 只能聊天，沒辦法幫你動手。每頁要 AI 做的事都寫在頁面上，沒有藏起來的指令。AI 安裝東西、花錢、刪檔前都會先問你；帳號密碼和金鑰一律你自己填，不要貼進對話。</div>
 <p class="ok noprint">按 Ctrl＋P（Mac 是 ⌘＋P）列印，這頁只會印出下面這張卡。</p>
 <div class="print-card">
   <h3>上班</h3>
   <p><b>「上次停在哪？」</b>開新對話的第一句</p>
-  <p><b>「開工：懶人包/○○.html」</b>要它照哪一頁做事</p>
+  <p><b>「照這頁做：網址」</b>要它照哪一頁做事（每頁最上面那句）</p>
+  <p><b>「下一頁」</b>這頁做完，接著做下一頁</p>
   <h3>學習助手</h3>
   <p><b>「拆這個：網址」</b>讀別人的內容，挑出適合你的（第 06 頁）</p>
   <p><b>「拆這個帳號最近 10 支：帳號網址」</b>一次看懂一個帳號的套路</p>
   <p><b>「整理這週學到的」</b>把這週的學習筆記收成一份重點</p>
+  <h3>做短影音（第二步）</h3>
+  <p><b>「找題：○○」「排下週要拍的」</b>找題目、排計畫（第 09 頁）</p>
+  <p><b>「題目：○○」</b>先出選擇題，再寫腳本（第 10 頁）</p>
+  <p><b>「做封面：○○」</b>照你的風格做封面（第 11 頁）</p>
+  <p><b>「粗剪 待剪 資料夾的影片」</b>先剪掉停頓和念錯的（第 12 頁）</p>
+  <p><b>「做動態字卡片：口白在 待剪」</b>口白配插畫動畫（第 13 頁）</p>
+  <p><b>「準備發片：○○」</b>貼文、YouTube、LINE 文案一次給（第 14 頁）</p>
+  <p><b>「下廣告：目的＝測試」</b>廣告管理員每格填什麼（第 15 頁）</p>
+  <p><b>「看數據」</b>丟洞察截圖，告訴你下週拍什麼（第 16 頁）</p>
   <h3>交辦</h3>
   <p><b>「列出做法讓我挑，標你最推薦的」</b>不知道怎麼交代的時候</p>
   <p><b>「這個工具要不要裝：網址」</b>它先給你安裝評估（第 05 頁）</p>
@@ -96,8 +130,8 @@ code{background:var(--gray-soft);border-radius:4px;padding:0 5px;font-size:.92em
 </div>
 
 <div class="ai">
-  <h2>給 AI 員工的工作單：使用者說「開工：懶人包/03指令卡.html」時</h2>
-  <p class="ok">同一頁的純文字版在 <code>懶人包/給Claude讀/</code>，內容相同，AI 可以直接讀那份。</p>
+  <h2>給 AI 員工的工作單：使用者貼這頁網址、或說「開工：懶人包/03指令卡.html」時</h2>
+  <p class="ok">同一頁的純文字版在 <code>懶人包/給Claude讀/</code>（網址：<code>https://bryanlin1531.github.io/ai-assistant/給Claude讀/03指令卡.md</code>），內容相同，AI 可以直接讀那份。使用者是貼網址給你、工作資料夾裡沒有「懶人包」資料夾時，這頁提到的 <code>懶人包/○○</code> 檔，到 <code>https://bryanlin1531.github.io/ai-assistant/</code> 後面接同樣的路徑讀（不用先下載整包）。</p><p class="ok">這頁做完，告訴使用者下一頁是「04 讓 AI 越用越懂你」；他說「下一頁」，就讀 <code>https://bryanlin1531.github.io/ai-assistant/給Claude讀/04越用越好.md</code> 照著做。</p>
   <p><span class="lbl">這樣做</span></p>
   <ol>
     <li>用一句話說明這張卡怎麼用，請使用者按 Ctrl＋P（Mac 是 ⌘＋P）印出來。</li>
@@ -108,7 +142,19 @@ code{background:var(--gray-soft);border-radius:4px;padding:0 5px;font-size:.92em
   <p><span class="lbl">紅線</span>替使用者按列印。</p>
 </div>
 
-<div class="credit">《打造你的 AI 學習助手》免費入門包・Bryan 的 AI 工作流<br>部分觀念參考小高工具間《AI Agent 入門基礎》免費課（tools.arminkao.com/learn），本包的頁面、例子與做法為自行整理。</div>
+<nav class="pn"><a class="prev" href="02開機設定.html">← 上一頁<span>02 開機設定：讓 AI 認識你和你在做的事</span></a><a class="next" href="04越用越好.html">下一頁 →<span>04 讓 AI 越用越懂你</span></a></nav>
+
+<div class="credit">《打造你的 AI 學習助手》免費課程・Bryan 的 AI 工作流<br>部分觀念參考小高工具間《AI Agent 入門基礎》免費課（tools.arminkao.com/learn），本課程的頁面、例子與做法為自行整理。</div>
 </div>
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.copy).textContent.trim();
+    var done=function(){b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製這句'},2000)};
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){fb(t);done()})}else{fb(t);done()}
+  });
+});
+function fb(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+</script>
 </body>
 </html>
