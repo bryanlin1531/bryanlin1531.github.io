@@ -47,6 +47,21 @@
   .btn:hover{background:#f3d29c}
   footer{text-align:center;color:var(--sub);font-size:14px;margin:30px 0;padding-bottom:56px}
   footer a{color:var(--gold-deep);font-weight:700;text-decoration:none}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  @media(max-width:620px){.ex{grid-template-columns:1fr}}
+  .ex .c{border-radius:14px;padding:16px 18px;font-size:15.5px}
+  .ex .bad{background:var(--red-soft);border:1px solid var(--line)}
+  .ex .good{background:var(--gold-soft);border:1px solid var(--gold)}
+  .ex .t{font-weight:900;margin-bottom:8px;font-size:15px}
+  .ex .bad .t{color:var(--red)}.ex .good .t{color:var(--gold-deep)}
+  .ex ul{margin:6px 0 0;padding-left:20px}.ex li{margin:3px 0}
+  .more{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  @media(max-width:620px){.more{grid-template-columns:1fr}}
+  .mcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-decoration:none;color:var(--ink)}
+  .mcard:hover{border-color:var(--gold)}
+  .mcard .k{font-size:13px;font-weight:900;color:var(--gold-deep);letter-spacing:.04em}
+  .mcard .ti{font-weight:900;font-size:17.5px;margin:4px 0 3px}
+  .mcard .ds{color:var(--sub);font-size:14px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -68,6 +83,26 @@
       <h2><span class="n serif">1</span>交辦四欄</h2>
       <ol class="check"><li><b>素材</b><span class="tip">我給你什麼（檔案、連結、資料）。</span></li><li><b>任務</b><span class="tip">要你做什麼。</span></li><li><b>交付格式</b><span class="tip">要長怎樣、多長、什麼形式。</span></li><li><b>確認點</b><span class="tip">哪裡先跟我確認，不要一路做到底。</span></li></ol>
       <p class="sub" style="margin:14px 0 0">想要離線版：<a class="dl" href="指令.md" download>⬇ 下載指令（.md）</a></p>
+    </section>
+    <section>
+      <h2><span class="n serif">2</span>這招長怎樣</h2>
+      <p class="sub">同一件事，差在有沒有先把四欄講清楚。</p>
+      <div class="ex">
+        <div class="c bad"><div class="t">✕ 一般講法</div>「幫我做個產品簡報」<br>→ 它自己亂抓重點，格式也不是你要的，來回改好幾次。</div>
+        <div class="c good"><div class="t">✓ 四欄講法</div>
+          <ul><li><b>素材</b>：這份產品規格</li><li><b>任務</b>：做一份對外提案簡報</li><li><b>交付格式</b>：10 頁內、每頁一個賣點、先給大綱</li><li><b>確認點</b>：大綱我 OK 了，你再做內頁</li></ul>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2><span class="n serif">3</span>更多 AI 工作流招式</h2>
+      <p class="sub">每一招都是一頁，貼給你的 AI 就能用。</p>
+      <div class="more">
+        <a class="mcard" href="https://bryanlin1531.github.io/three-columns/"><div class="k">哪句是真的</div><div class="ti">結論分三欄</div><div class="ds">逼它分「已確認／推論／未知」，不把猜當事實。</div></a>
+        <a class="mcard" href="https://bryanlin1531.github.io/guard/"><div class="k">外來檔防護</div><div class="ti">別被下載檔指揮</div><div class="ds">外來的檔先當資料看，不當指令。</div></a>
+        <a class="mcard" href="https://bryanlin1531.github.io/outcome/"><div class="k">成果導向</div><div class="ti">做東西前先定這句</div><div class="ds">先定對象看完要完成什麼動作，再決定形式。</div></a>
+        <a class="mcard" href="https://www.instagram.com/bryanlin_531/reels/"><div class="k">更多影片</div><div class="ti">看所有 Reel →</div><div class="ds">IG ＠bryanlin_531，一招一支短影片。</div></a>
+      </div>
     </section>
     <section class="cta">
       <h2 class="serif">想要一整套 AI 學習助手？</h2>
