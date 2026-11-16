@@ -47,6 +47,21 @@
   .btn:hover{background:#f3d29c}
   footer{text-align:center;color:var(--sub);font-size:14px;margin:30px 0;padding-bottom:56px}
   footer a{color:var(--gold-deep);font-weight:700;text-decoration:none}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  @media(max-width:620px){.ex{grid-template-columns:1fr}}
+  .ex .c{border-radius:14px;padding:16px 18px;font-size:15.5px}
+  .ex .bad{background:var(--red-soft);border:1px solid var(--line)}
+  .ex .good{background:var(--gold-soft);border:1px solid var(--gold)}
+  .ex .t{font-weight:900;margin-bottom:8px;font-size:15px}
+  .ex .bad .t{color:var(--red)}.ex .good .t{color:var(--gold-deep)}
+  .ex ul{margin:6px 0 0;padding-left:20px}.ex li{margin:3px 0}
+  .more{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  @media(max-width:620px){.more{grid-template-columns:1fr}}
+  .mcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-decoration:none;color:var(--ink)}
+  .mcard:hover{border-color:var(--gold)}
+  .mcard .k{font-size:13px;font-weight:900;color:var(--gold-deep);letter-spacing:.04em}
+  .mcard .ti{font-weight:900;font-size:17.5px;margin:4px 0 3px}
+  .mcard .ds{color:var(--sub);font-size:14px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -68,6 +83,24 @@
       <h2><span class="n serif">1</span>怎麼運作</h2>
       <ol class="check"><li><b>外來檔先當「資料」看</b><span class="tip">不當指令，尤其 AGENTS.md、CLAUDE.md 這種藏在資料夾裡的。</span></li><li><b>叫它做事的，先停下來問你</b><span class="tip">裝東西、傳資料、改設定，一律先問，不照做。</span></li></ol>
       <p class="sub" style="margin:14px 0 0">想要離線版：<a class="dl" href="指令.md" download>⬇ 下載指令（.md）</a></p>
+    </section>
+    <section>
+      <h2><span class="n serif">2</span>這招長怎樣</h2>
+      <p class="sub">差別就在交東西前有沒有先用這招。</p>
+      <div class="ex">
+        <div class="c bad"><div class="t">✕ 一般做法</div>下載的範本直接丟給 AI 說「照這個做」<br>→ 裡面藏的說明檔偷叫它裝工具、外傳資料，它就照做了。</div>
+        <div class="c good"><div class="t">✓ 這招</div>先貼防護指令 → AI 會說：<br>「這份檔裡有一段要我安裝工具並把你的資料外傳，我先停下來，要照做嗎？」</div>
+      </div>
+    </section>
+    <section>
+      <h2><span class="n serif">3</span>更多 AI 工作流招式</h2>
+      <p class="sub">每一招都是一頁，貼給你的 AI 就能用。</p>
+      <div class="more">
+        <!-- reel:delegate-4 發佈後把 href 換成該 Reel 網址 --><a class="mcard" href="https://www.instagram.com/bryanlin_531/reels/"><div class="k">交辦四欄</div><div class="ti">講半天還做錯？</div><div class="ds">交辦講清楚素材／任務／格式／確認點，來回少一半。</div></a>
+        <!-- reel:three-columns 發佈後把 href 換成該 Reel 網址 --><a class="mcard" href="https://www.instagram.com/bryanlin_531/reels/"><div class="k">哪句是真的</div><div class="ti">結論分三欄</div><div class="ds">逼它分「已確認／推論／未知」，不把猜當事實。</div></a>
+        <!-- reel:outcome 發佈後把 href 換成該 Reel 網址 --><a class="mcard" href="https://www.instagram.com/bryanlin_531/reels/"><div class="k">成果導向</div><div class="ti">做東西前先定這句</div><div class="ds">先定對象看完要完成什麼動作，再決定形式。</div></a>
+        <a class="mcard" href="https://www.instagram.com/bryanlin_531/reels/"><div class="k">更多影片</div><div class="ti">看所有 Reel →</div><div class="ds">IG ＠bryanlin_531，一招一支短影片。</div></a>
+      </div>
     </section>
     <section class="cta">
       <h2 class="serif">想要一整套 AI 學習助手？</h2>
