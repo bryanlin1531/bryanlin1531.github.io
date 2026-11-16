@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>做東西前先定這一句｜Bryan 的 AI 工作流</title>
+<meta name="description" content="多數人直接說「幫我做個簡報」。先定「對象看完要能做什麼」，產出完全不一樣。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f7f2e9;--card:#fffdf8;--ink:#2b2420;--sub:#62574d;--line:#e6dccb;--gold:#9a6c27;--gold-soft:#f3e6cc;--gold-deep:#7a521a;--band:#2b2420;--band-ink:#f7f2e9;--band-sub:#d9ccb9;--band-gold:#e8bf78;--red:#b3261e;--red-soft:#fbe9e7;}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1d1916;--card:#27221e;--ink:#f2ebe1;--sub:#c2b5a6;--line:#3d352e;--gold:#e0b46a;--gold-soft:#3a2f20;--gold-deep:#f0cf96;--band:#0f0c0a;--band-ink:#f7f2e9;--band-sub:#c9bba8;--band-gold:#e8bf78;--red:#ff8a80;--red-soft:#3b2220;}}
+  *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.7;font-size:18px}
+  .serif{font-family:"Noto Serif TC","PingFang TC",serif}
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px}
+  a{color:var(--gold-deep);text-underline-offset:3px}
+  .hero{background:var(--band);color:var(--band-ink);padding:48px 0 44px}
+  .hero .in{max-width:980px;margin:0 auto;padding:0 16px}
+  .hero .label{font-size:19px;font-weight:700;color:var(--band-gold);margin:0 0 10px}
+  .hero h1{font-size:clamp(34px,6vw,56px);line-height:1.18;margin:0 0 16px;font-weight:900;text-wrap:balance}
+  .hero h1 em{font-style:normal;color:var(--band-gold)}
+  .hero .lead{font-size:clamp(19px,2.4vw,23px);color:var(--band-sub);margin:0;max-width:38em}
+  .hero .by{margin:20px 0 0;color:var(--band-sub);font-size:15px}.hero .by b{color:var(--band-ink)}
+  section{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 24px;margin:20px 0}
+  section:first-of-type{margin-top:26px}
+  h2{font-size:23px;margin:0 0 4px;font-weight:900;display:flex;align-items:baseline;gap:12px}
+  h2 .n{font-family:"Noto Serif TC",serif;font-weight:900;font-size:36px;line-height:1;color:var(--gold)}
+  .sub{color:var(--sub);font-size:15.5px;margin:4px 0 16px}
+  ol.check{list-style:none;padding:0;margin:0}
+  ol.check li{position:relative;padding:13px 0 13px 38px;border-top:1px solid var(--line)}
+  ol.check li:first-child{border-top:none}
+  ol.check li::before{content:"\2713";position:absolute;left:0;top:13px;width:26px;height:26px;border-radius:50%;background:var(--gold-soft);color:var(--gold-deep);font-weight:900;display:flex;align-items:center;justify-content:center;font-size:15px}
+  li b{color:var(--ink)}.tip{color:var(--sub);font-size:14.5px;display:block;margin-top:2px}
+  .note{background:var(--gold-soft);border-radius:12px;padding:12px 16px;margin-top:14px;font-size:15px;color:var(--ink)}
+  .dl{display:inline-flex;align-items:center;gap:8px;margin-top:4px;background:transparent;color:var(--gold-deep);font-weight:700;text-decoration:underline;padding:4px 0;font-size:15px}
+  section.action{background:var(--gold-soft);border:2px solid var(--gold)}
+  section.action h2{color:var(--gold-deep)}
+  .steps{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 16px}
+  .steps span{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:700;font-size:15px}
+  .copy{font:inherit;font-size:18px;font-weight:900;background:var(--gold);color:#fff;border:0;border-radius:14px;padding:15px 30px;cursor:pointer}
+  .copy:hover{background:var(--gold-deep)}
+  .cta{background:var(--band);color:var(--band-ink);text-align:center;border:0}
+  .cta h2{justify-content:center;color:var(--band-ink)}.cta .sub{color:var(--band-sub)}
+  .btn{display:inline-block;background:var(--band-gold);color:#2b2420;font-weight:900;text-decoration:none;padding:14px 30px;border-radius:14px;margin-top:6px;font-size:18px}
+  .btn:hover{background:#f3d29c}
+  footer{text-align:center;color:var(--sub);font-size:14px;margin:30px 0;padding-bottom:56px}
+  footer a{color:var(--gold-deep);font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="hero"><div class="in">
+    <p class="label">Bryan 的 AI 工作流</p>
+    <h1 class="serif">做東西前，<em>先定這一句</em></h1>
+    <p class="lead">做簡報、寫文章前先問 AI 這一句，產出完全不一樣。多數人直接說「幫我做個簡報」；我會先定：讀的人看完要能做什麼。</p>
+    <p class="by">作者：<b>Bryan</b>｜IG ＠bryanlin_531</p>
+  </div></div>
+  <div class="wrap">
+    <section class="action">
+      <h2 class="serif">最簡單的用法：交給你的 AI</h2>
+      <p class="sub">複製下面這段，貼給你的 Claude，說「照這個做」——以後它做任何東西前，會先跟你確認「對象看完要完成什麼動作」，再動手。</p>
+      <div class="steps"><span>1　按複製指令</span><span>2　貼給你的 AI</span><span>3　說「照這個做」</span></div>
+      <button class="copy" id="copyBtn" type="button">📋 複製指令</button>
+      <pre id="aiPrompt" hidden>以後我請你做任何交付物（簡報、文章、影片、頁面），你先別急著做，先跟我確認：這東西的對象看完要能完成什麼動作？定好這個，再決定形式和內容。現在問我：這次的對象和他要完成的動作是什麼？</pre>
+    </section>
+    <section>
+      <h2><span class="n serif">1</span>怎麼運作</h2>
+      <ol class="check"><li><b>先定對象的動作</b><span class="tip">讀的人看完，要能完成什麼。</span></li><li><b>再決定形式</b><span class="tip">定了目標才挑簡報／文章／影片。</span></li><li><b>內容對準那個動作</b><span class="tip">不做漂亮但沒用的東西。</span></li></ol>
+      <p class="sub" style="margin:14px 0 0">想要離線版：<a class="dl" href="指令.md" download>⬇ 下載指令（.md）</a></p>
+    </section>
+    <section class="cta">
+      <h2 class="serif">想要一整套 AI 學習助手？</h2>
+      <p class="sub">這只是其中一招。我把「從零打造你的 AI 學習助手」整包做成免費入門包了。</p>
+      <a class="btn" href="https://bryanlin1531.github.io/ai-assistant/">免費拿入門包 →</a>
+    </section>
+    <footer>喜歡這套做法就追蹤 <a href="https://www.instagram.com/bryanlin_531/">＠bryanlin_531</a><br>Bryan 的 AI 工作流</footer>
+  </div>
+<script>
+  (function(){var b=document.getElementById('copyBtn');if(!b)return;b.addEventListener('click',function(){var t=document.getElementById('aiPrompt').textContent;function d(){b.textContent='\u2713 已複製，去貼給你的 AI';setTimeout(function(){b.textContent='\ud83d\udccb 複製指令';},2500);}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(d).catch(f);}else{f();}function f(){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');}catch(e){}a.remove();d();}});})();
+</script>
+</body></html>
